@@ -1,6 +1,7 @@
 package CA_2;
 
 public class Manager {
+
     private String managerType;
 
     public Manager(String managerType) {
@@ -18,5 +19,5 @@ public class Manager {
     @Override
     public String toString() {
         return managerType;
-    }   
+    }
 }
