@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class dataFile {
+public class DataFile {
 
     private String[] names;
     private String[] surnames;
@@ -45,7 +45,7 @@ public class dataFile {
     }
 
 //Constructor resposible to count the lines and initiate the arrays   
-    public dataFile(String fileName) {
+    public DataFile(String fileName) {
         int countLines = linesInFile(fileName);
         if (countLines == 0) {
             System.out.println("The file is empty!");
