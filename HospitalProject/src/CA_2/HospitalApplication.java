@@ -4,11 +4,16 @@ import java.util.Scanner;
 
 public class HospitalApplication {
 
+    private static DataFile dataFile;
     private static Scanner myKb = new Scanner(System.in);
 
     public static void main(String[] args) {
         System.out.println("||||-- WELCOME TO DUBLIN HOSPITAL SYSTEM - DHS --||||");
         System.out.println();
+        
+        if(!loadDataFromFile()){
+            return;
+        }
 
         MainMenu optionMainMenu = null;
         do {
@@ -17,10 +22,10 @@ public class HospitalApplication {
             System.out.println("2. PATIENT INFORMATION");
             System.out.println("3. EXIT SYSTEM");
             int option = correctInput();
-            
-            if(option >= 1 && option <= MainMenu.values().length){
+
+            if (option >= 1 && option <= MainMenu.values().length) {
                 optionMainMenu = MainMenu.values()[option - 1];
-                switch(optionMainMenu){
+                switch (optionMainMenu) {
                     case EMPLOYEE_INFORMATIONS:
                         displayEmployeeMenu();
                         break;
@@ -28,19 +33,19 @@ public class HospitalApplication {
                         displayPatientMenu();
                         break;
                     case EXIT_SYSTEM:
-                        System.out.println("EXITING THE DUBLIN HOSPITAL SYSTEM. SEE YOU SOON!");
+                        System.out.println("Exiting the Dublin Hospital System. See You Soon!!");
                         return;
                 }
-            }else{
+            } else {
                 System.out.println("This is an invalid choice, please select a valid option from Menu!");
             }
-        }while(optionMainMenu != MainMenu.EXIT_SYSTEM);
+        } while (optionMainMenu != MainMenu.EXIT_SYSTEM);
     }
 
-    private static int correctInput(){
-        while(!myKb.hasNextInt()){
+    private static int correctInput() {
+        while (!myKb.hasNextInt()) {
             System.out.println("You Entered an invalid Input. Please enter a number: ");
-            myKb.next();            
+            myKb.next();
         }
         int number = myKb.nextInt();
         myKb.nextLine();
@@ -94,11 +99,10 @@ public class HospitalApplication {
         } while (optionEmployeeMenu != EmployeeMenu.EXIT_MENU);
     }
 
-
-    private static void displayPatientMenu(){
+    private static void displayPatientMenu() {
         PatientMenu optionPatientMenu = null;
-        
-        do{
+
+        do {
             System.out.println("--- PATIENT MENU - DHS ---");
             System.out.println("1. ADD A NEW PATIENT");
             System.out.println("2. SORT PATIENT LIST");
@@ -106,14 +110,14 @@ public class HospitalApplication {
             System.out.println("4. VIEW TREATMENT INCOME");
             System.out.println("5. EXPORT PATIENT REPORT");
             System.out.println("6. EXIT PATIENT MENU");
-            
+
             System.out.println("CHOOSE ONE OF THE OPTIONS:");
             int option = correctInput();
-            
-            if(option >= 1 & option <= PatientMenu.values().length){
+
+            if (option >= 1 & option <= PatientMenu.values().length) {
                 optionPatientMenu = PatientMenu.values()[option - 1];
-                
-                switch(optionPatientMenu){
+
+                switch (optionPatientMenu) {
                     case ADD_NEW_PATIENT:
                         System.out.println("ADDING A NEW PATIENT...");
                         break;
@@ -133,11 +137,23 @@ public class HospitalApplication {
                         System.out.println("RETURNING TO MAIN MENU...");
                         return;
                 }
-                
-            }else{
+
+            } else {
                 System.out.println("PLEASE SELECT FROM ALL THE AVAILABLE OPTIONS!");
             }
-        }while(optionPatientMenu != PatientMenu.EXIT_MENU);
+        } while (optionPatientMenu != PatientMenu.EXIT_MENU);
+    }
+
+    private static boolean loadDataFromFile(){
+        System.out.print("Enter a filename to be read: ");
+        String fileName = myKb.nextLine().toLowerCase().trim();
+        dataFile = new DataFile(fileName);
+        if(dataFile.getName() == null || dataFile.getSurname() == null){
+            return loadDataFromFile();
+        }
+        System.out.println("The file is completely loaded!");
+        System.out.println();
+        return true;
     }
     
 }

@@ -49,7 +49,7 @@ public class DataFile { //Public class, accessible from others classes/packages
                 //For each line read, the surnames (all words after the comma), will be added to the List
                 listSurname.add(lines.substring(lastComma + 1).trim()); //Collecting the names located at after the last comma + 1, its means that will take the surname after the coma and add one extra index, reaching all the contents after the comma up to the end of the line, trim added to remove spaces before and after the content.
             }
-            System.out.println("The file " + fileName + " was read successfully!"); //Messasge to show the user that the file was read correctly.
+            System.out.println("\nThe file " + fileName + " was read successfully!"); //Messasge to show the user that the file was read correctly.
 
         } catch (IOException e) {//Catch bblock, used to find any exception when reading the file and show a message to the user, explaing what the error was.
             System.out.println("This file couldn't be read!" + e.getMessage());
