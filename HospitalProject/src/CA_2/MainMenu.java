@@ -35,6 +35,7 @@ enum EmployeeMenu{
 enum PatientMenu{
     ADD_NEW_PATIENT,
     SORT_PATIENT_LIST,
+    SEARCH_PATIENT,
     VIEW_TREATMENT_INCOME,
     EXPORT_PATIENT_REPORT,
     EXIT_MENU;
