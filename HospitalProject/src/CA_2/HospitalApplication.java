@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class HospitalApplication {
 
     private static List<Employee> employees = new ArrayList<>();
-    private static GenerateRandomEmployee generateRandomEmployee = new GenerateRandomEmployee();
+    private static GenerateRandomEmployee randomEmployee = new GenerateRandomEmployee();
     private static DataFile dataFile;
     private static Scanner myKb = new Scanner(System.in);
     private static List<Patient> patients = new ArrayList<>();
@@ -21,8 +21,8 @@ public class HospitalApplication {
     public static void main(String[] args) {
         System.out.println("||||-- WELCOME TO DUBLIN HOSPITAL SYSTEM - DHS --||||");
         System.out.println();
-
-        if (!loadDataFromFile()) {
+       
+        if (!loadDataFromFile()){
             return;
         }
 
@@ -48,7 +48,7 @@ public class HospitalApplication {
                         return;
                 }
             } else {
-                System.out.println("This is an invalid choice, please select a valid option from Menu!");
+                System.out.println("This is an invalid choice, please select a valid option from Menu!(1-3):");
             }
         } while (optionMainMenu != MainMenu.EXIT_SYSTEM);
     }
@@ -68,7 +68,7 @@ public class HospitalApplication {
         displayEmployees();
         System.out.println();
         do {
-            System.out.println("--- EMPLOYEE MENU - DHS ---");
+            System.out.println("\n--- EMPLOYEE MENU - DHS ---");
             System.out.println("1. SORT EMPLOYEE LIST");
             System.out.println("2. SEARCH FOR AN EMPLOYEE");
             System.out.println("3. ADD A NEW EMPLOYEE");
@@ -77,7 +77,7 @@ public class HospitalApplication {
             System.out.println("6. EXPORT EMPLOYEE PAYROLL REPORT");
             System.out.println("7. EXIT EMPLOYEE MENU");
 
-            System.out.print("CHOOSE ONE OF THE OPTIONS:");
+            System.out.println("CHOOSE ONE OF THE OPTIONS: ");
             int option = correctInput();
 
             if (option >= 1 && option <= EmployeeMenu.values().length) {
@@ -121,7 +121,7 @@ public class HospitalApplication {
         PatientMenu optionPatientMenu = null;
 
         do {
-            System.out.println("--- PATIENT MENU - DHS ---");
+            System.out.println("\n--- PATIENT MENU - DHS ---");
             System.out.println("1. ADD A NEW PATIENT");
             System.out.println("2. SORT PATIENT LIST");
             System.out.println("3. SEARCH PATIENT");
@@ -129,7 +129,7 @@ public class HospitalApplication {
             System.out.println("5. EXPORT PATIENT REPORT");
             System.out.println("6. EXIT PATIENT MENU");
 
-            System.out.println("CHOOSE ONE OF THE OPTIONS:");
+            System.out.println("CHOOSE ONE OF THE OPTIONS: ");
             int option = correctInput();
 
             if (option >= 1 & option <= PatientMenu.values().length) {
@@ -164,28 +164,38 @@ public class HospitalApplication {
                 }
 
             } else {
-                System.out.println("PLEASE SELECT FROM ALL THE AVAILABLE OPTIONS!");
+                System.out.println("Please Select From All the Available Options! (1- 6)");
             }
         } while (optionPatientMenu != PatientMenu.EXIT_MENU);
     }
 
     private static boolean loadDataFromFile() {
-        System.out.print("Enter a filename to be read: ");
-        String fileName = myKb.nextLine().toLowerCase().trim();
-        dataFile = new DataFile(fileName);
-        if (dataFile.getName() == null || dataFile.getSurname() == null) {
-            System.out.println("Error Loading the Names and Surnames from the file!");
-            return loadDataFromFile();
-        }
-        
-        generateRandomEmployee.setEmployeeName(Arrays.asList(dataFile.getName())); 
-        generateRandomEmployee.setEmployeeSurname(Arrays.asList(dataFile.getSurname()));
-        System.out.println("The file is completely loaded!");
-        generateRandomEmployee.generatingRandomEmployees(20);
-        employees.addAll(generateRandomEmployee.getEmployees());
-        System.out.println();
+        boolean isLoaded = false;
+        do {
+            System.out.print("Enter a filename to be read: ");
+            String fileName = myKb.nextLine().toLowerCase().trim();
+
+            try {
+                dataFile = new DataFile(fileName);
+                if (dataFile.getName() == null || dataFile.getSurname() == null || dataFile.getName().length == 0 || dataFile.getSurname().length == 0) {
+                    System.out.println("Error Loading the Names and Surnames from the file!");
+                    continue;
+                }
+
+                randomEmployee.setEmployeeName(Arrays.asList(dataFile.getName()));
+                randomEmployee.setEmployeeSurname(Arrays.asList(dataFile.getSurname()));
+                System.out.println("The file is completely loaded!");
+                randomEmployee.generatingRandomEmployees(20);
+                employees.addAll(randomEmployee.getEmployees());
+                isLoaded = true;
+                System.out.println();
+            } catch (Exception e) {
+                System.out.println("An error occurred when reading the file: " + e.getMessage());
+            }
+        } while (!isLoaded);
         return true;
     }
+    
 
     private static boolean isValidName(String name) {
         return name != null && NAME_PATTERN.matcher(name).matches();
@@ -198,7 +208,8 @@ public class HospitalApplication {
             if (isValidName(name)) {
                 break;
             } else {
-                System.out.println("This is a Invalid name! Only enters allowed (A-Z)!");
+                System.out.print("This is a Invalid name! Only enters allowed (A-Z)."); 
+                System.out.print("\nLet's try again, Enter the Name: ");
             }
         }
         return name;
@@ -256,7 +267,7 @@ public class HospitalApplication {
         System.out.println("Position: " + manager.getPosition().getTitle());
         System.out.println("Department: " + department.getDepartmentName());
 
-        System.out.println("Is this Data Correct? (YES/NO)");
+        System.out.println("Is this Data Correct? (YES/NO): ");
         String confirmation = myKb.nextLine().trim().toLowerCase();
 
         if (confirmation.equals("yes")) {
@@ -318,9 +329,9 @@ public class HospitalApplication {
     }
 
     private static void generateRandomEmployee() {
-        generateRandomEmployee.generatingRandomEmployees(1);
-        employees.addAll(generateRandomEmployee.getEmployees());
-        for (Employee employee : generateRandomEmployee.getEmployees()) {
+        randomEmployee.generatingRandomEmployees(1);
+        employees.addAll(randomEmployee.getEmployees());
+        for (Employee employee : randomEmployee.getEmployees()) {
             System.out.println("Employee: " + employee);
         }
         System.out.println("\nCurrent number of employees after this random generation: " + employees.size());
@@ -345,7 +356,8 @@ public class HospitalApplication {
 
     private static void displayMonthlyExpenses() {
         double totalExpenses = employees.stream().mapToDouble(Employee::getMonthlyPayment).sum();
-        System.out.printf("Monthly Expenses for Employees: €%.2f%n", totalExpenses);
+        System.out.printf("Monthly Expenses for Employees: €%.2f", totalExpenses);
+        System.out.println();
     }
 
     private static void exportEmployees() {
@@ -357,37 +369,37 @@ public class HospitalApplication {
         String firstName = validateName("Enter the Patient First Name: ");
         String lastName = validateName("Enter the Patient Last Name: ");
 
-        System.out.println("Enter the Patient Age: ");
+        System.out.print("Enter the Patient Age: ");
         int age = correctInput();
 
         LocalDateTime admissionDate = LocalDateTime.now();
 
-        System.out.println("Enter the Patient Diagnosis: ");
+        System.out.print("Enter the Patient Diagnosis: ");
         String diagnosis = myKb.nextLine().trim();
 
         Department department = selectDepartmentForPatient();
 
-        System.out.println("Enter Attending Doctor Name: ");
+        System.out.print("Enter Attending Doctor Name: ");
         String attendinDoctor = myKb.nextLine().trim();
 
-        System.out.println("Enter Stay Days: ");
+        System.out.print("Enter Stay Days: ");
         int stayDays = myKb.nextInt();
 
-        System.out.println("Enter Daily Rate: ");
+        System.out.print("Enter Daily Rate: ");
         double dailyRate = myKb.nextDouble();
         myKb.nextLine();
 
-        System.out.println("\nPlease confirm the following Patient Details: ");
+        System.out.println("Please confirm the following Patient Details: ");
         System.out.println("First Name: " + firstName);
         System.out.println("Last Name: " + lastName);
         System.out.println("Age: " + age);
         System.out.println("Admission Date: " + admissionDate);
         System.out.println("Diagnosis: " + diagnosis);
-        System.out.println("Department: " + department);
-        System.out.println("Attending Doctor: " + attendinDoctor);
-        System.out.println("Stay Date: " + stayDays);
-        System.out.println("Daily Rate: " + dailyRate);
-        System.out.println("Is all the Data Correct? (YES/NO)");
+        System.out.println("Department: " + department.getDepartmentName());
+        System.out.println("Attending Doctor: Dr. " + attendinDoctor);
+        System.out.println("Stay Date: " +  stayDays);
+        System.out.println("Daily Rate: " + String.format("%.2f", dailyRate));
+        System.out.print("Is all the Data Correct? (YES/NO): ");
         String confirmation = myKb.nextLine().trim().toLowerCase();
 
         if (confirmation.equals("yes")) {

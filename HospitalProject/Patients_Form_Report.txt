@@ -1,0 +1,70 @@
+
+Patient Report: 
+
+
+Patient: Abcedario da Silva
+Age: 65
+Condition: Heart Attack
+Department: Department: Cardiology
+Attending Doctor: Ray
+Stay Days: 0
+Discharge Date: 05-11-2024 20:01:05
+Daily Rate: € 350.0
+Total Cost: € 0.0
+
+
+Patient: Andrew Boris
+Age: 45
+Condition: Covid
+Department: Department: Intensive Care Unit (ICU
+Attending Doctor: Pfizer
+Stay Days: 0
+Discharge Date: 05-11-2024 20:03:14
+Daily Rate: € 550.0
+Total Cost: € 0.0
+
+
+Patient: Ben Howard
+Age: 28
+Condition: Right Arm Broken
+Department: Department: Orthopaedics
+Attending Doctor: Bond
+Stay Days: 0
+Discharge Date: 05-11-2024 20:01:59
+Daily Rate: € 1200.0
+Total Cost: € 0.0
+
+
+Patient: Juliana Moraes
+Age: 30
+Condition: Pregnant
+Department: Department: Laboratory
+Attending Doctor: Rose
+Stay Days: 0
+Discharge Date: 05-11-2024 20:00:13
+Daily Rate: € 800.0
+Total Cost: € 0.0
+
+
+Patient: Luiz Sena
+Age: 36
+Condition: Fever
+Department: Department: Emergency
+Attending Doctor: James
+Stay Days: 0
+Discharge Date: 05-11-2024 19:56:13
+Daily Rate: € 250.0
+Total Cost: € 0.0
+
+
+Patient: Viviane Lucena
+Age: 33
+Condition: Cold
+Department: Department: Laboratory
+Attending Doctor: Jess
+Stay Days: 0
+Discharge Date: 05-11-2024 19:58:02
+Daily Rate: € 150.0
+Total Cost: € 0.0
+
+Hospital Total Income: €0.00

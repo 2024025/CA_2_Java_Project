@@ -54,7 +54,7 @@ public class DataFile { //Public class, accessible from others classes/packages
             System.out.println("\nThe file " + fileName + " was read successfully!"); //Messasge to show the user that the file was read correctly.
 
         } catch (IOException e) {//Catch bblock, used to find any exception when reading the file and show a message to the user, explaing what the error was.
-            System.out.println("This file couldn't be read!" + e.getMessage());
+            System.out.println("This file couldn't be read! " + e.getMessage());
         }
 
         //Transforming the lists listName and listSurname into array.
@@ -72,7 +72,7 @@ public class DataFile { //Public class, accessible from others classes/packages
             return;
         }
         double totalExpenses = 0.0;
-        fileName = "Employees_Form_Report";
+        fileName = "Employees_Form_Report.txt";
         try{
             BufferedWriter wr = new BufferedWriter(new FileWriter(fileName, false));
             wr.write("\nEmployee Report: ");

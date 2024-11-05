@@ -15,8 +15,8 @@ public class Patient extends Person {
     private LocalDateTime dischargeDate;
 
     public Patient(String firstName, String lastName, int age, LocalDateTime admissionDate, String diagnosis,
-            Department department, String attendingDoctor, int stayday,
-            double dailyRat) { //, LocalDateTime dischargeDate
+            Department department, String attendingDoctor, int staydays,
+            double dailyRate) { 
 
         super(firstName, lastName);
         this.age = age;
@@ -26,7 +26,7 @@ public class Patient extends Person {
         this.attendingDoctor = attendingDoctor;
         this.staydays = staydays;
         this.dailyRate = dailyRate;
-        this.dischargeDate = dischargeDate;
+        this.dischargeDate = DischargeDateCalculator();
     }
 
     public int getAge() {
@@ -79,7 +79,7 @@ public class Patient extends Person {
                 + "\nAttending Doctor: " + attendingDoctor
                 + "\nStay Days: " + staydays
                 + "\nDischarge Date: " + dischargeDate.format(formatter)
-                + "\nDaily Rate: € " + dailyRate
-                + "\nTotal Cost: € " + treatmentCostCalculator();
+                + "\nDaily Rate: € " + String.format("%.2f", dailyRate)
+                + "\nTotal Cost: € " + String.format("%.2f",treatmentCostCalculator());
     }
 }

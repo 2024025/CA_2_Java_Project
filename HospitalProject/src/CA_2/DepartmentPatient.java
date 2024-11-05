@@ -7,7 +7,7 @@ public class DepartmentPatient extends Department {
 
     private static final List<Department> patientDepartments = Arrays.asList(
             new Department("Surgery"),
-            new Department("Intensive Care Unit (ICU"),
+            new Department("Intensive Care Unit (ICU)"),
             new Department("Critical Care Unit (CCU)"),
             new Department("General Care"),
             new Department("Emergency"),

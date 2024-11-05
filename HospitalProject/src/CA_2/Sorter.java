@@ -25,21 +25,20 @@ public class Sorter { //Declared as public to be acessible in other classes
         //There are more than one element in the subList. Then the there are more elements to be divided.
         if (left < right) {
             int middle = (left + right) / 2; //Getting the middle of the list to divide it in two.
-            mergeSortList(person, left, right); //Recursive call responsible to divide the list from left part up to middle.
+            mergeSortList(person, left, middle); //Recursive call responsible to divide the list from left part up to middle.
             mergeSortList(person, middle + 1, right);//Recursive call responsible to divide the list from middle +1 to the right
 
             //After dividing the list into two halves, now the method called is mergeSortedSubLists, that will be used to merge the sorted subLists
             mergeSortedSubLists(person, left, middle, right);
-
+        }
             //Checking if the whole list is already sorted:
             //if condition to check if the list is already completed, starting from first index 0(left) until the last index right (people.size() - 1)
             if (left == 0 && right == person.size() - 1) {
                 System.out.println("\nSorted List: "); //Message to interact with the user
                 for (Person people : person) { //For each loop iterating each element from people List.
-                    System.out.println(person); //Printing the List sorted in ascending order:
+                    System.out.println(people); //Printing the List sorted in ascending order:
                 }
             }
-        }
     }
 
     //Method created to merge/combine two subLists, allowing the algorithm to complete its function to sort the List
