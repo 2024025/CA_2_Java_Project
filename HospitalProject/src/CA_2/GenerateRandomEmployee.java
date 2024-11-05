@@ -7,26 +7,44 @@ import java.util.Random;
 public class GenerateRandomEmployee {
 
     private List<Employee> employees = new ArrayList<>();
-    private List<Person> availableNames = new ArrayList<>();
+    private List<String> employeeName = new ArrayList<>();
+    private List<String> employeeSurname = new ArrayList<>();
     private Random random = new Random();
 
     public List<Employee> getEmployees() {
         return employees;
     }
 
-    public void setAvailableNames(List<Person> availableNames) {
-        this.availableNames = availableNames;
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public List<String> getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(List<String> employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public List<String> getEmployeeSurname() {
+        return employeeSurname;
+    }
+
+    public void setEmployeeSurname(List<String> employeeSurname) {
+        this.employeeSurname = employeeSurname;
     }
 
     public void generatingRandomEmployees(int quantityOfEmployees) {
-        if (availableNames.isEmpty()) {
+        if (employeeName.isEmpty() || employeeSurname.isEmpty()) {
             System.out.println("Names or surnames coudn't be loaded from the file.");
             return;
         }
         employees.clear();
-        for (int i = 0; i < quantityOfEmployees; i++) {
-            Person person = availableNames.get(random.nextInt(availableNames.size()));
 
+        for (int i = 0; i < quantityOfEmployees; i++) {
+            String name = employeeName.get(random.nextInt(employeeName.size()));
+            String surname = employeeSurname.get(random.nextInt(employeeSurname.size()));
             List<Manager> managers = Manager.getEmployeePosition();
 
             Manager randomManager = managers.get(random.nextInt(managers.size()));
@@ -47,7 +65,7 @@ public class GenerateRandomEmployee {
                 throw new RuntimeException("No suitable department was found for the position:" + position.getTitle());
             }
 
-            Employee employee = new Employee(person.getFirstName(), person.getLastname(), randomManager, department);
+            Employee employee = new Employee(name, surname, randomManager, department);
             employees.add(employee);
         }
     }

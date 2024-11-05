@@ -8,7 +8,9 @@ and surnames can be accessed in other classes due to the getter methods (getName
 and getSurname)
  */
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,5 +65,59 @@ public class DataFile { //Public class, accessible from others classes/packages
     public DataFile(String fileName) { //The DataFile constructor takes the fileName and calls the method to read the file.
         readFile(fileName);
     }
+    
+    public void writeEmployeeReport(String fileName, List<Employee> employees){
+        if(employees == null || employees.isEmpty()){
+            System.out.println("\nThere is no employees to write in the report!");
+            return;
+        }
+        double totalExpenses = 0.0;
+        fileName = "Employees_Form_Report";
+        try{
+            BufferedWriter wr = new BufferedWriter(new FileWriter(fileName, false));
+            wr.write("\nEmployee Report: ");
+            wr.newLine();
+            wr.newLine();
+            for(Employee employee : employees){
+                wr.write(employee.toString());
+                wr.newLine();
+                
+                totalExpenses += employee.getMonthlyPayment();
+            }
+            wr.write(String.format("Hospital Total Monthly Expenses: €%.2f", totalExpenses));
+            wr.newLine();
+            System.out.println("\nEMployee Report Successfully Created in: " + fileName);
+            wr.close();
+        }catch(IOException e){
+            System.out.println("\nError when writing the file: " +e.getMessage());
+        }
+    }
+    
+    public void writePatientReport(String fileName, List<Patient> patients){
+        if(patients == null || patients.isEmpty()){
+            System.out.println("\nThere is no Patients to write in the Report!");
+            return;
+        }
+        double totalIncome = 0.0;
+        fileName = "Patients_Form_Report.txt";
 
+        try {
+            BufferedWriter wr = new BufferedWriter(new FileWriter(fileName, false));
+            wr.write("\nPatient Report: ");
+            wr.newLine();
+            wr.newLine();
+            for (Patient patient : patients) {
+                wr.write(patient.toString());
+                wr.newLine();
+                wr.newLine();
+                totalIncome += patient.treatmentCostCalculator();
+            }
+            wr.write(String.format("Hospital Total Income: €%.2f", totalIncome));
+            wr.newLine();
+            System.out.println("\nPatients Report Successfully Created in: " + fileName);
+            wr.close();
+        } catch (IOException e) {
+            System.out.println("\nError when writing the file: " + e.getMessage());
+        }
+    }
 }

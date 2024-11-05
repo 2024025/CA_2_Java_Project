@@ -35,7 +35,7 @@ public class Searcher { //Defining Searcher as a public class, allowing it to be
 
     
     // Method created to search the person in the list, with the parameters people, name and the indexes left and right.
-    public int binarySearchByName(List<Person> people, String name, int left, int right) { 
+    public int binarySearchByName(List<? extends Person> person, String name, int left, int right) { 
     
     //In case the left index is greater than the right index, the method will return an int -1. It is the condition to end
     //the search and indicate to the user that the person wasn't found.
@@ -51,7 +51,7 @@ public class Searcher { //Defining Searcher as a public class, allowing it to be
         int middle = left + (right - left) / 2;
         
     //Getting the first and lastname to build a 'fullName', treating this String using trim to remove extra spaces and lowercase.
-        String fullName = (people.get(middle).getFirstName() + " " + people.get(middle).getLastname()).toLowerCase().trim();
+        String fullName = (person.get(middle).getFirstName() + " " + person.get(middle).getLastname()).toLowerCase().trim();
         
     //If the fullName is equal to the name entered by the user, it will return the middle. Its means that the person was found!
         if (fullName.equalsIgnoreCase(name)) {
@@ -61,23 +61,23 @@ public class Searcher { //Defining Searcher as a public class, allowing it to be
     //The function will return the method, to run another searcher but starting from the right side and discarding the left part of the list.
     //And middle will be adjusted to the middle + 1, moving one spot to the right.
         } else if (fullName.compareTo(name) < 0) {
-            return binarySearchByName(people, name, middle + 1, right);
+            return binarySearchByName(person, name, middle + 1, right);
             
     //In this else condition, it will run exactly the oposite way of the else if, the search will restart discarding the right part of the list.
     //And middle will be adjusted to the middle - 1, moving one spot to the left.
         } else {
-            return binarySearchByName(people, name, left, middle - 1);
+            return binarySearchByName(person, name, left, middle - 1);
         }
     }
     
     
     //This method will be used to capture the input from the user and will use the binarySearchByName to locate the person being searched
     //This method is public and will be used in the main class.
-    public void searchByName(List<Person> people, String name){
+    public void searchByName(List<? extends Person> person, String name){
         String inputName = name.trim().toLowerCase(); //Treating the String, removing spaces and keep the names on lowercase
-        int index = binarySearchByName(people, inputName, 0, people.size() - 1); //Calling the binarySearchByName Method
+        int index = binarySearchByName(person, inputName, 0, person.size() - 1); //Calling the binarySearchByName Method
         if(index >= 0){ //this condition is used to determine if the algorithm found the person, if the index >= 0 its means the person was found.
-            System.out.println(people.get(index)); //Printing the person details.
+            System.out.println(person.get(index)); //Printing the person details.
         }else{// This conditions is used to show the message to the user that the person wasnt found on the list.
             System.out.println("Person wasn't found!");
         }

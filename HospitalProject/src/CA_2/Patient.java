@@ -14,11 +14,11 @@ public class Patient extends Person {
     private double dailyRate;
     private LocalDateTime dischargeDate;
 
-    public Patient(int age, LocalDateTime admissionDate, String diagnosis,
-            Department department, String attendingDoctor, int staydays,
-            double dailyRate, LocalDateTime dischargeDate, String firstName, String lastname) {
+    public Patient(String firstName, String lastName, int age, LocalDateTime admissionDate, String diagnosis,
+            Department department, String attendingDoctor, int stayday,
+            double dailyRat) { //, LocalDateTime dischargeDate
 
-        super(firstName, lastname);
+        super(firstName, lastName);
         this.age = age;
         this.admissionDate = admissionDate;
         this.diagnosis = diagnosis;
