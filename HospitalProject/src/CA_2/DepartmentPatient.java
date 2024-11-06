@@ -1,5 +1,15 @@
 package CA_2;
 
+/*
+this class is an inheritance from the Department class, being an extension of it.
+This class is responsible for determining the departments which hospital patients
+can be treated, such as: ICU, Surgery, Laboratory, etc.
+This class has a static list 'patientDepartments' where will display all the departments
+in the hospital and has a method 'getPatientDepartments' returning the list, and being
+accessible in other classes, as example: GenerateRandomemployee, main class HospitalApplication.
+*/
+
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,7 +32,7 @@ public class DepartmentPatient extends Department {
             new Department("Laboratory")
     );
 
-    public DepartmentPatient(String name) {
+    public DepartmentPatient(String name) {//Constructor used to call the superclass Department, and get the department name.
         super(name);
     }
 
