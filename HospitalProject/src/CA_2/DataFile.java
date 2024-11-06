@@ -66,33 +66,41 @@ public class DataFile { //Public class, accessible from others classes/packages
         readFile(fileName);
     }
     
-    public void writeEmployeeReport(String fileName, List<Employee> employees){
-        if(employees == null || employees.isEmpty()){
-            System.out.println("\nThere is no employees to write in the report!");
+    
+    
+    
+    //This method was created to write an employee report in a text file, called: "Employees_Form_Report.txt"
+    public void writeEmployeeReport(String fileName, List<Employee> employees){//The method is public, and can be called in the main class so that it can be executed.
+        if(employees == null || employees.isEmpty()){ //This condition will be used to check if the employee list is empty, If it is, it will return, ending the execution of this method.
+            System.out.println("\nThere is no employees to write in the report!");//Message to guide and give instructions to the user.
             return;
         }
-        double totalExpenses = 0.0;
-        fileName = "Employees_Form_Report.txt";
-        try{
+        double totalExpenses = 0.0;//Initializing the variable that will calculate the total cost of hospital staff expenses
+        fileName = "Employees_Form_Report.txt";// Defining the name of the file to be exported.
+        try{ // Try-Catch block used to handle exceptions in case of problems when writing the file
+            
+//Using the bufferedWriter to write the text file and using the 'false' mode, so that the file is overwritten. In case need to keep the previous records, the true option would be recommended.
             BufferedWriter wr = new BufferedWriter(new FileWriter(fileName, false));
-            wr.write("\nEmployee Report: ");
+            wr.write("\nEmployee Report: "); //Message to interact with Users.
+            wr.newLine();//Adding an extra line to the text file
             wr.newLine();
-            wr.newLine();
-            for(Employee employee : employees){
-                wr.write(employee.toString());
-                wr.newLine();
+            for(Employee employee : employees){//for each loop used to iterate through each employee in the list
+                wr.write(employee.toString());//Using the toString() method to write the employee details to the text file
+                wr.newLine();//Adding an extra line to the text file
                 
-                totalExpenses += employee.getMonthlyPayment();
+                totalExpenses += employee.getMonthlyPayment();//Used to calculate the total payment made to the hospital employees
             }
-            wr.write(String.format("Hospital Total Monthly Expenses: €%.2f", totalExpenses));
-            wr.newLine();
-            System.out.println("\nEMployee Report Successfully Created in: " + fileName);
+            wr.write(String.format("Hospital Total Monthly Expenses: €%.2f", totalExpenses)); // Printing the total amount paid for employees.
+            wr.newLine();//Adding a new Line
+            System.out.println("\nEMployee Report Successfully Created in: " + fileName);//Message to interact with users, and showing that the writer was successful
             wr.close();
-        }catch(IOException e){
-            System.out.println("\nError when writing the file: " +e.getMessage());
+        }catch(IOException e){//Catch used to capture any exceptions in the I/O
+            System.out.println("\nError when writing the file: " +e.getMessage());//Message to guide the users, explaining the issue reasons.
         }
     }
     
+    
+//  Very similar method, used to write a report about Patients, following the same intentions of the method above.
     public void writePatientReport(String fileName, List<Patient> patients){
         if(patients == null || patients.isEmpty()){
             System.out.println("\nThere is no Patients to write in the Report!");

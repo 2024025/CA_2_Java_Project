@@ -1,5 +1,13 @@
 package CA_2;
 
+/*This Manager class is responsible for associating a position or role to a specific sector
+of the company. This class will be of great importance in this program because it will prevent
+that when generating an employee randomly, this employee will be related to a non-corresponding
+sector, for example: Doctor in the It sector, or Nurse in the Human Resources.
+This class will be used in other classes as Employee, GenerateRandomEmployee and Main Class.
+*/
+
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -9,14 +17,17 @@ public class Manager {
 
     private Position position;
 
-    public Manager(Position position) {
+    public Manager(Position position) {//class constructor, which will be used to initialize position
+        
+//Condition used to check if position is null, if this condition is true, will throw an exception to make 
+//sure that always will have an valid position for a Manager        
         if (position == null) {
             throw new IllegalArgumentException("Manager type can not be null!");
         }
         this.position = position;
     }
 
-    public Position getPosition() {
+    public Position getPosition() {//Getter method used to be accessible in other classes
         return position;
     }
 
@@ -25,6 +36,9 @@ public class Manager {
         return position.toString();
     }
 
+//This list is constant and unmodifiable, being immutable to protect and avoid changes about the relation between roles and departments.
+//It will represent all avaiable managers type in this hospital and will link it to their respective departments
+//It is used when the user is adding a new employee, and a new menu will show up, to choose a position and a department.    
     private static final List<Position> POSITIONS = Collections.unmodifiableList(Arrays.asList(
             new Position("Department Head", Arrays.asList("Quality Assurance", "Health and Safety", "Finance", "Medical Report", "Billing and Insurance", "Patient Support Services")),
             new Position("Supervisor", Arrays.asList("General Care", "Finance", "Intensive Care Unit (ICU)", "Emergency", "Pharmacy", "Laboratory", "Information Technology (I.T)", "Procurement and Supply")),
@@ -36,6 +50,12 @@ public class Manager {
             new Position("Administrative Assistant", Arrays.asList("Finance", "Medical Records", "Billing and Insurance", "Human Resources (H.R)", "Procurement and Supply", "Information Technology (I.T)", "Facility Management", "Patient Support Services"))
     ));
 
+    
+/*This metodh will be responsible for creating a list of Manager objects, where each one will be associated with a position
+    A list called 'managers' will be created initially and then a for each loop will be used to 'run' each position in the 'POSITIONS'
+    list. After this, the Manager Object with each existing position in the 'POSITIONS' list will be added to the managers list.
+    Finally, the new managers list will be returned containing all the roles and their positions.
+*/    
     public static List<Manager> getEmployeePosition() {
         List<Manager> managers = new ArrayList<>();
         for (Position pos : POSITIONS) {

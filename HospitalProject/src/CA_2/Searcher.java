@@ -54,7 +54,7 @@ public class Searcher { //Defining Searcher as a public class, allowing it to be
         String fullName = (person.get(middle).getFirstName() + " " + person.get(middle).getLastname()).toLowerCase().trim();
         
     //If the fullName is equal to the name entered by the user, it will return the middle. Its means that the person was found!
-        if (fullName.equalsIgnoreCase(name)) {
+        if (fullName.equalsIgnoreCase(name)) {//equalsIgnoreCase used to ignore differences between lower and upper case letters.
             return middle;
             
     //Condition else if used to compare the fullName with the name entered by the user, if the fullName is lower than the name being searched
