@@ -194,11 +194,9 @@ public class HospitalApplication {
                     case ADD_NEW_PATIENT:
                         System.out.println("ADDING A NEW PATIENT...");
                         addNewPatient();//Calling the methd responsible to add a new patient 
-                        displayPatient();//calling the method responsible to display on the screen the patient added.
                         break;
                     case SORT_PATIENT_LIST:
                         System.out.println("SORTING PATIENT LIST...");
-                        displayPatient();//calling the method responsible to display on the screen the patient added.
                         sortPatients();//Calling the method responsible to sort the list of patients added.
                         break;
                     case SEARCH_PATIENT:
@@ -522,6 +520,10 @@ assigning them positions, departments, hours worked and total amount received.
 //This method is responsible for sorting the list of patients in alphabetical order.
 //It will use the mergeSortList method of the sorter class, searching for patients from index 0 to the end of the list.    
     private static void sortPatients() {
+        if(patients.isEmpty()){//condition created in case the list of patients is empty.
+            System.out.println("No Patients avaiable to sort. Returning to Patient Menu...");//message will show up to instruct the user that theres no patients in the list.
+            return;//returning to the patient menu
+        }
         System.out.println("Sorting Patients...");
         sorter.mergeSortList(patients, 0, patients.size() - 1);
         System.out.println();
