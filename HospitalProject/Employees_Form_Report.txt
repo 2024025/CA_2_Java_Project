@@ -1,0 +1,27 @@
+
+Employee Report: 
+
+Employee: Alice O'Neill - Doctor - Surgery - Worked Hours: 131h - Salary: € 7205.00
+Employee: Bella Collins - Director - Executive - Worked Hours: 91h - Salary: € 5460.00
+Employee: Bella Martin - Administrative Assistant - Finance - Worked Hours: 120h - Salary: € 1920.00
+Employee: Callum Scott - Nurse - General Care - Worked Hours: 122h - Salary: € 4270.00
+Employee: Callum Simmons - Nurse - General Care - Worked Hours: 132h - Salary: € 4620.00
+Employee: Declan Edwards - Administrative Assistant - Finance - Worked Hours: 155h - Salary: € 2480.00
+Employee: Evie Ward - Director - Executive - Worked Hours: 112h - Salary: € 6720.00
+Employee: Finn Fitzpatrick - Nurse - General Care - Worked Hours: 108h - Salary: € 3780.00
+Employee: Grace Flanagan - Supervisor - General Care - Worked Hours: 125h - Salary: € 5625.00
+Employee: Isla Ward - Supervisor - General Care - Worked Hours: 92h - Salary: € 4140.00
+Employee: James Flanagan - Doctor - Surgery - Worked Hours: 103h - Salary: € 5665.00
+Employee: James Quinn - Supervisor - General Care - Worked Hours: 112h - Salary: € 5040.00
+Employee: Lily Nolan - Nurse Technician - General Care - Worked Hours: 158h - Salary: € 3950.00
+Employee: Lucy Ryan - Nurse - General Care - Worked Hours: 122h - Salary: € 4270.00
+Employee: Mia McCarthy - Supervisor - General Care - Worked Hours: 89h - Salary: € 4005.00
+Employee: Niall Green - Director - Executive - Worked Hours: 110h - Salary: € 6600.00
+Employee: Oliver Kennedy - Nurse - General Care - Worked Hours: 127h - Salary: € 4445.00
+Employee: Padraig Doyle - Doctor - Surgery - Worked Hours: 154h - Salary: € 8470.00
+Employee: Poppy Moore - Coordinator - Radiology and Imaging - Worked Hours: 151h - Salary: € 6040.00
+Employee: Rory Kavanagh - Coordinator - Radiology and Imaging - Worked Hours: 142h - Salary: € 5680.00
+Employee: Sophia Grant - Administrative Assistant - Finance - Worked Hours: 119h - Salary: € 1904.00
+Employee: Sophia McMahon - Coordinator - Radiology and Imaging - Worked Hours: 107h - Salary: € 4280.00
+Employee: Thomas Adams - Nurse - General Care - Worked Hours: 93h - Salary: € 3255.00
+Hospital Total Monthly Expenses: €109824.00
