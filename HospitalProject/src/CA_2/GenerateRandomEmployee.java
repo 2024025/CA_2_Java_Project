@@ -56,9 +56,9 @@ public class GenerateRandomEmployee {
             String name = employeeName.get(random.nextInt(employeeName.size()));//Selecting the name from the list, randomly
             String surname = employeeSurname.get(random.nextInt(employeeSurname.size()));//Selecting the surname from the list, randomly
             
-            List<Manager> managers = Manager.getEmployeePosition();//list calling the Manager class and the method 'getemployeePosition' to be add it to the new random employee
+            List<Role> managers = Role.getEmployeePosition();//list calling the Role class and the method 'getemployeePosition' to be add it to the new random employee
 
-            Manager randomManager = managers.get(random.nextInt(managers.size()));//Selecting the managers roles randomly
+            Role randomManager = managers.get(random.nextInt(managers.size()));//Selecting the managers roles randomly
             Position position = randomManager.getPosition();//getting the position and addressing it to the manager role.
 
             List<String> allowedDepartments = position.getAllowedDepartment();//List to get the departments allowed for a specific position
@@ -79,7 +79,7 @@ public class GenerateRandomEmployee {
             }
 
             
-//Creating a new employee, defining its name, surname, a random Manager(role) and the allowed department for its role            
+//Creating a new employee, defining its name, surname, a random Role(role) and the allowed department for its role            
             Employee employee = new Employee(name, surname, randomManager, department);
             employees.add(employee);// adding the new employee generated to the lsit of employees.
         }

@@ -1,6 +1,6 @@
 package CA_2;
 
-/*This Manager class is responsible for associating a position or role to a specific sector
+/*This Role class is responsible for associating a position or role to a specific sector
 of the company. This class will be of great importance in this program because it will prevent
 that when generating an employee randomly, this employee will be related to a non-corresponding
 sector, for example: Doctor in the It sector, or Nurse in the Human Resources.
@@ -13,14 +13,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Manager {
+public class Role {
 
     private Position position;
 
-    public Manager(Position position) {//class constructor, which will be used to initialize position
+    public Role(Position position) {//class constructor, which will be used to initialize position
         
 //Condition used to check if position is null, if this condition is true, will throw an exception to make 
-//sure that always will have an valid position for a Manager        
+//sure that always will have an valid position for a Role        
         if (position == null) {
             throw new IllegalArgumentException("Manager type can not be null!");
         }
@@ -51,15 +51,15 @@ public class Manager {
     ));
 
     
-/*This metodh will be responsible for creating a list of Manager objects, where each one will be associated with a position
+/*This metodh will be responsible for creating a list of Role objects, where each one will be associated with a position
     A list called 'managers' will be created initially and then a for each loop will be used to 'run' each position in the 'POSITIONS'
-    list. After this, the Manager Object with each existing position in the 'POSITIONS' list will be added to the managers list.
+    list. After this, the Role Object with each existing position in the 'POSITIONS' list will be added to the managers list.
     Finally, the new managers list will be returned containing all the roles and their positions.
 */    
-    public static List<Manager> getEmployeePosition() {
-        List<Manager> managers = new ArrayList<>();
+    public static List<Role> getEmployeePosition() {
+        List<Role> managers = new ArrayList<>();
         for (Position pos : POSITIONS) {
-            managers.add(new Manager(pos));
+            managers.add(new Role(pos));
         }
         return managers;
     }

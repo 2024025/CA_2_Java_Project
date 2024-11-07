@@ -8,13 +8,13 @@ This class will be called in the GenerateRandomEmployee and HospitalApplication 
 
 public class Employee extends Person {
 //Private attributes to store informations about the Employees.
-    private Manager manager;
+    private Role manager;
     private Department department;
     private int hoursWorked;
     private double monthlyPayment;
 
 //    Constructor used to initialize all the attributes
-    public Employee(String firstName, String lastName, Manager manager, Department department) {
+    public Employee(String firstName, String lastName, Role manager, Department department) {
         super(firstName, lastName);
         this.manager = manager;
         this.department = department;
@@ -42,7 +42,7 @@ public class Employee extends Person {
     }
 
     
-    public Manager getManager() {//Getter used to be accessible in other classes.
+    public Role getManager() {//Getter used to be accessible in other classes.
         return manager;
     }
 

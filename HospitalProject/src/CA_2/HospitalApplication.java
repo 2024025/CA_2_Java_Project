@@ -293,8 +293,8 @@ assigning them positions, departments, hours worked and total amount received.
         return name;
     }
 
-//Method responsible to check if there is any duplicated data on the list. this method has three parameters, name, surname and Manager.
-    private static boolean isDataDuplicated(String name, String surname, Manager manager) {
+//Method responsible to check if there is any duplicated data on the list. this method has three parameters, name, surname and Role.
+    private static boolean isDataDuplicated(String name, String surname, Role manager) {
         for (Employee employee : employees) {//for-each loop used to iterate each employee, from the employees list. It will be used to run each employee and check if it already exists.
 //conditions created to compare if the firstname and lastname are equals to name and surname, and if the title is equals to the title received by the employee
             if (employee.getFirstName().equalsIgnoreCase(name)
@@ -312,7 +312,7 @@ assigning them positions, departments, hours worked and total amount received.
 //Declaring variables that will be used in the user inputs.        
         String name;
         String surname;
-        Manager manager = null;
+        Role manager = null;
         Department department = null;
 
         System.out.print("Employee First Name: ");//Message to give user instructions
@@ -350,10 +350,10 @@ assigning them positions, departments, hours worked and total amount received.
     }
 
 //this method is responsible to show a list of positions, and ask the user to select one of them to assign it to a employee that will be added.    
-    private static Manager selectManager() {
+    private static Role selectManager() {
         while (true) {//while loop used to in case the user dont choose a valid option in the manager list.
             System.out.println("Which Position?");//message to interact with the user
-            List<Manager> managers = Manager.getEmployeePosition();//calling the method getEmployeePosition from the class Manager and getting its list
+            List<Role> managers = Role.getEmployeePosition();//calling the method getEmployeePosition from the class Role and getting its list
             for (int i = 0; i < managers.size(); i++) {//foor loop used to run all the list and show each avaiable position to the user choose
                 System.out.println((i + 1) + ". " + managers.get(i));//printing the list enumerating each position, ex: 1. Department Head, 2. Supervisor, etc
             }
@@ -376,7 +376,7 @@ assigning them positions, departments, hours worked and total amount received.
     }
 
 //This method is responsible to show a list of departments , and will ask the user to assign one of the departments in the list to the new person added to the list.    
-    private static Department selectDepartment(Manager manager) {
+    private static Department selectDepartment(Role manager) {
         List<String> allowedDepartments = manager.getPosition().getAllowedDepartment();//getting the list of allowed departments for the position choosed by the user
         List<Department> allDepartments = DepartmentEmployee.getEmployeeDepartments();//taking all existing departments
         List<Department> filteredDepartments = new ArrayList<>();//creating a new list of departments
