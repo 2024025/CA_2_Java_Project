@@ -524,7 +524,6 @@ assigning them positions, departments, hours worked and total amount received.
             System.out.println("No Patients avaiable to sort. Returning to Patient Menu...");//message will show up to instruct the user that theres no patients in the list.
             return;//returning to the patient menu
         }
-        System.out.println("Sorting Patients...");
         sorter.mergeSortList(patients, 0, patients.size() - 1);
         System.out.println();
     }
