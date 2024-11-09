@@ -11,9 +11,11 @@ Binary Search works by dividing the list of person object in two parts in every 
 when executed, it will search for the index of a person in the list, where the full name
 will be provided by the user when inserting the input.
 
-2- searchByName: This method was used only to perform a processing of the String sent by
-the user throught the input. When entering the name to be searched, this method will process the string,
-removing extras spaces and transforming letters into lowercase, to make the search more accurate.
+2- searchByName: This method was used only to perform a Sort by name in ascending order, importing the
+method mergeSortList from the class Sorter, using the Merge Sort Algorithm and after sort the list, this
+method is in charge to process the String sent by the user throught the input. 
+When entering the name to be searched, this method will process the string,removing extras spaces 
+and transforming letters into lowercase, to make the search more accurate.
 
 The choice for a binary search algorithm was due to the efficiency of this type of algorithm,
 as it has a time complexity classified as O(log n), that is, its execution time increases
@@ -33,6 +35,7 @@ import java.util.List;
 
 public class Searcher { //Defining Searcher as a public class, allowing it to be accessed by other classes.
 
+    private Sorter sorter = new Sorter();// creating an object sorter, importing from the class Sorter
     
     // Method created to search the person in the list, with the parameters people, name and the indexes left and right.
     public int binarySearchByName(List<? extends Person> person, String name, int left, int right) { 
@@ -71,9 +74,12 @@ public class Searcher { //Defining Searcher as a public class, allowing it to be
     }
     
     
-    //This method will be used to capture the input from the user and will use the binarySearchByName to locate the person being searched
+    //This method will be used to sort the names in the list in ascending order, using the method mergeSortList, from the class Sorter and 
+    //capture the input from the user. After it this method will be implemented in binarySearchByName method to locate the person being searched
     //This method is public and will be used in the main class.
     public void searchByName(List<? extends Person> person, String name){
+        sorter.mergeSortList(person, 0, person.size()-1);//Impor
+        
         String inputName = name.trim().toLowerCase(); //Treating the String, removing spaces and keep the names on lowercase
         int index = binarySearchByName(person, inputName, 0, person.size() - 1); //Calling the binarySearchByName Method
         if(index >= 0){ //this condition is used to determine if the algorithm found the person, if the index >= 0 its means the person was found.

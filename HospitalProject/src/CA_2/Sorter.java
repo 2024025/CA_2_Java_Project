@@ -31,19 +31,11 @@ public class Sorter { //Declared as public to be acessible in other classes
             //After dividing the list into two halves, now the method called is mergeSortedSubLists, that will be used to merge the sorted subLists
             mergeSortedSubLists(person, left, middle, right);
         }
-            //Checking if the whole list is already sorted:
-            //if condition to check if the list is already completed, starting from first index 0(left) until the last index right (people.size() - 1)
-            if (left == 0 && right == person.size() - 1) {
-                System.out.println("\nSorted List: "); //Message to interact with the user
-                for (Person people : person) { //For each loop iterating each element from people List.
-                    System.out.println(people); //Printing the List sorted in ascending order:
-                }
-            }
     }
 
-    //Method created to merge/combine two subLists, allowing the algorithm to complete its function to sort the List
     
-    private void mergeSortedSubLists(List<? extends Person> list, int left, int middle, int right) {
+    //Method created to merge/combine two subLists, allowing the algorithm to complete its function to sort the List
+        private void mergeSortedSubLists(List<? extends Person> list, int left, int middle, int right) {
         
         //A new variable leftlist that will be used to store a Person list from the left index up to the middle index.
         List<Person> leftList = new ArrayList<>(list.subList(left, middle + 1));

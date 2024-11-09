@@ -94,6 +94,16 @@ public class HospitalApplication {
         return number;//Returning a valid int to be used in the menu option.
     }
 
+//    Method created to get the right input from the user, in case the user enter a letter or character, a error message will show up to give instructions.
+    private static double correctDoubleInput() {
+        while (!myKb.hasNextDouble()) {//while loop created to keep asking the user to enter a correct input, only accepting numbers. when the input dont hasNextDouble(double) it will return.
+            System.out.println("You Entered an invalid Input. Please enter a number: ");//Message to warning the user about the wrong input entered
+            myKb.next();//Used to consume the line, avoiding an infinit loop.
+        }
+        double doubleNumber = myKb.nextDouble();//This variable will be used to read the next input from the user, in case the user has entered a wrong input before
+        return doubleNumber;//Returning a valid double to be used in the menu option.
+    }
+
 //This method is used to display the employee menu and execute the actions accordingly the user choice.    
 //It allows some functionalities as sort, search, add, generate random employees, create report, check total expenses, etc.    
     private static void displayEmployeeMenu() {
@@ -109,13 +119,14 @@ public class HospitalApplication {
             System.out.println("||          EMPLOYEE INFORMATION         ||");
             System.out.println("==========================================");
             System.out.println("|                                        |");
-            System.out.println("|  1. SORT EMPLOYEE LIST                 |");
-            System.out.println("|  2. SEARCH FOR AN EMPLOYEE             |");
-            System.out.println("|  3. ADD A NEW EMPLOYEE                 |");
-            System.out.println("|  4. GENERATE A RANDOM EMPLOYEE         |");
-            System.out.println("|  5. VIEW MONTHLY PAYROLL EXPENSES      |");
-            System.out.println("|  6. EXPORT EMPLOYEE PAYROLL REPORT     |");
-            System.out.println("|  7. EXIT TO MAIN MENU                  |");
+            System.out.println("|  1. DISPLAY LIST OF EMPLOYEES          |");
+            System.out.println("|  2. SORT EMPLOYEE LIST                 |");
+            System.out.println("|  3. SEARCH FOR AN EMPLOYEE             |");
+            System.out.println("|  4. ADD A NEW EMPLOYEE                 |");
+            System.out.println("|  5. GENERATE A RANDOM EMPLOYEE         |");
+            System.out.println("|  6. VIEW MONTHLY PAYROLL EXPENSES      |");
+            System.out.println("|  7. EXPORT EMPLOYEE PAYROLL REPORT     |");
+            System.out.println("|  8. EXIT TO MAIN MENU                  |");
             System.out.println("|                                        |");
             System.out.println("==========================================");
             System.out.println("CHOOSE ONE OF THE OPTIONS: ");
@@ -126,9 +137,14 @@ public class HospitalApplication {
             if (option >= 1 && option <= EmployeeMenu.values().length) {
                 optionEmployeeMenu = EmployeeMenu.values()[option - 1];//Setting up the index, because the enum class starts with 0,then I need to add -1 on it to match the options.
                 switch (optionEmployeeMenu) {
+                    case DISPLAY_EMPLOYEE_LIST://Calling the employeeMenu from MainMenu class
+                        System.out.println("DISPLAYING EMPLOYEE LIST...");
+                        displayEmployees();//calling the method to display the employee list
+                        break;
                     case SORTING_EMPLOYEE_LIST://Calling the employeeMenu from MainMenu class
                         System.out.println("SORTING EMPLOYEE LIST...");
                         sortEmployee();//Calling the method responsible to sort the employee list.
+                        displayEmployees();
                         break;
                     case SEARCHING_EMPLOYEE:
                         System.out.println("SEARCHING FOR AN EMPLOYEE...");
@@ -155,7 +171,7 @@ public class HospitalApplication {
                         return;//Returning to the Main Menu.
                 }
             } else {
-                System.out.println("Please insert a válid option, only numbers allowed (1 - 7): ");//message to give instructions to the user, in case a number out of this range is entered.
+                System.out.println("Please insert a válid option, only numbers allowed (1 - 8): ");//message to give instructions to the user, in case a number out of this range is entered.
             }
         } while (optionEmployeeMenu != EmployeeMenu.EXIT_MENU);//The loop keeps on, until the user choose the option Exit, that it's option 7 on the displayed menu.
     }
@@ -175,11 +191,12 @@ public class HospitalApplication {
             System.out.println("==========================================");
             System.out.println("|                                        |");
             System.out.println("|  1. ADD A NEW PATIENT                  |");
-            System.out.println("|  2. SORT PATIENT LIST                  |");
-            System.out.println("|  3. SEARCH FOR A PATIENT               |");
-            System.out.println("|  4. VIEW TOTAL TREATMENT INCOME        |");
-            System.out.println("|  5. EXPORT PATIENT REPORT              |");
-            System.out.println("|  6. EXIT TO MAIN MENU                  |");
+            System.out.println("|  2. DISPLAY LIST OF PATIENTS           |");
+            System.out.println("|  3. SORT PATIENT LIST                  |");
+            System.out.println("|  4. SEARCH FOR A PATIENT               |");
+            System.out.println("|  5. VIEW TOTAL TREATMENT INCOME        |");
+            System.out.println("|  6. EXPORT PATIENT REPORT              |");
+            System.out.println("|  7. EXIT TO MAIN MENU                  |");
             System.out.println("|                                        |");
             System.out.println("==========================================");
             System.out.println("CHOOSE ONE OF THE OPTIONS: ");
@@ -194,6 +211,10 @@ public class HospitalApplication {
                     case ADD_NEW_PATIENT:
                         System.out.println("ADDING A NEW PATIENT...");
                         addNewPatient();//Calling the methd responsible to add a new patient 
+                        break;
+                    case DISPLAY_PATIENT_LIST:
+                        System.out.println("DISPLAYING LIST OF PATIENTS...");
+                        displayPatientList();//calling the method to display the patient list
                         break;
                     case SORT_PATIENT_LIST:
                         System.out.println("SORTING PATIENT LIST...");
@@ -217,7 +238,7 @@ public class HospitalApplication {
                 }
 
             } else {
-                System.out.println("Please Select From All the Available Options! (1- 6)");//Message to give instructions to the user, in case a number out of this range is entered.
+                System.out.println("Please Select From All the Available Options! (1- 7)");//Message to give instructions to the user, in case a number out of this range is entered.
             }
         } while (optionPatientMenu != PatientMenu.EXIT_MENU);//The loop keeps on, until the user choose the option Exit, that it's option 6 on the displayed menu.
     }
@@ -335,17 +356,25 @@ assigning them positions, departments, hours worked and total amount received.
         System.out.println("Position: " + manager.getPosition().getTitle());
         System.out.println("Department: " + department.getDepartmentName());
 
-        System.out.println("Is this Data Correct? (YES/NO): ");//Message to get the user confirmation
-        String confirmation = myKb.nextLine().trim().toLowerCase();//Variable to receive the user answer.
+        //        while loop + if/else condition to get the correct answer from the user
+        boolean confirm = false;
+        while (!confirm) {
+            System.out.println("Is this Data Correct? (YES/NO): ");//Message to get the user confirmation
+            String confirmation = myKb.nextLine().trim().toLowerCase();//Variable to receive the user answer.
 
 //If-Else condition to execute the addition, in this case if the user checked the data and decided to added the new employee, a 'yes' has to be entered, otherwise the program return to the method
-        if (confirmation.equals("yes")) {
-            Employee employee = new Employee(name, surname, manager, department);
-            employees.add(employee);
-            System.out.println("Employee added sucessfully: " + employee);
-        } else {
-            System.out.println("Let's try again..");
-            addEmployee();
+            if (confirmation.equals("yes")) {
+                Employee employee = new Employee(name, surname, manager, department);
+                employees.add(employee);
+                System.out.println("Employee added sucessfully: " + employee);
+                confirm = true;
+            } else if (confirmation.equals("no")) {
+                System.out.println("Employee addition cancelled. Returning to Employee Menu...");
+                displayEmployeeMenu();
+                break;
+            } else {
+                System.out.println("Invalid input. Please enter 'Yes' to confirm or 'No' to cancel!");
+            }
         }
     }
 
@@ -464,13 +493,13 @@ assigning them positions, departments, hours worked and total amount received.
         Department department = selectDepartmentForPatient();//Selecting the department where the patient will be directed in the hospital, using the selectDepartmentForPatient method
 
         System.out.print("Enter Attending Doctor Name: ");
-        String attendinDoctor = myKb.nextLine().trim();//Receiving the Doctor name
+        String attendinDoctor = validateName();//Receiving the Doctor name
 
         System.out.print("Enter Stay Days: ");
-        int stayDays = myKb.nextInt();//Entry to inform how many days the patient will stay in the hospital / how long the treatment will last
+        int stayDays = correctInput();//Entry to inform how many days the patient will stay in the hospital / how long the treatment will last
 
         System.out.print("Enter Daily Rate: ");
-        double dailyRate = myKb.nextDouble();//Determining the value of treatment
+        double dailyRate = correctDoubleInput();//Determining the value of treatment
         myKb.nextLine();
 
 //User confirmation message containing all patient data and their care at the hospital. The message follows an if-else condition in which if the user 
@@ -485,16 +514,25 @@ assigning them positions, departments, hours worked and total amount received.
         System.out.println("Attending Doctor: Dr. " + attendinDoctor);
         System.out.println("Stay Date: " + stayDays);
         System.out.println("Daily Rate: " + String.format("%.2f", dailyRate));
-        System.out.print("Is all the Data Correct? (YES/NO): ");
-        String confirmation = myKb.nextLine().trim().toLowerCase();
+        
+//        while loop + if/else condition to get the correct answer from the user
+        boolean confirm = false;
+        while (!confirm) {
+            System.out.print("Is all the Data Correct? (YES/NO): ");
+            String confirmation = myKb.nextLine().trim().toLowerCase();
 
-        if (confirmation.equals("yes")) {
-            Patient newPatient = new Patient(firstName, lastName, age, admissionDate, diagnosis, department, attendinDoctor, stayDays, dailyRate);
-            patients.add(newPatient);
-            System.out.println("Patient added successfully: \n" + newPatient);
-        } else {
-            System.out.println("Patient addition cancelled. Let's try again!");
-            addNewPatient();
+            if (confirmation.equals("yes")) {
+                Patient newPatient = new Patient(firstName, lastName, age, admissionDate, diagnosis, department, attendinDoctor, stayDays, dailyRate);
+                patients.add(newPatient);
+                System.out.println("Patient added successfully: \n" + newPatient);
+                confirm = true;
+            } else if (confirmation.equals("no")) {
+                System.out.println("Patient addition cancelled. Returning to Patient Menu!");
+                displayPatientMenu();
+                break;
+            } else {
+                System.out.println("Invalid input. Please enter 'Yes' to confirm or 'no' to cancel.");
+            }
         }
     }
 
@@ -520,12 +558,12 @@ assigning them positions, departments, hours worked and total amount received.
 //This method is responsible for sorting the list of patients in alphabetical order.
 //It will use the mergeSortList method of the sorter class, searching for patients from index 0 to the end of the list.    
     private static void sortPatients() {
-        if(patients.isEmpty()){//condition created in case the list of patients is empty.
+        if (patients.isEmpty()) {//condition created in case the list of patients is empty.
             System.out.println("No Patients avaiable to sort. Returning to Patient Menu...");//message will show up to instruct the user that theres no patients in the list.
             return;//returning to the patient menu
         }
-        sorter.mergeSortList(patients, 0, patients.size() - 1);
-        System.out.println();
+        sorter.mergeSortList(patients, 0, patients.size() - 1);//using the method mergesortList from Sorter class, runing in the patients list, from index 0 to the last index of the list
+        displayPatientList();//using the method to display the patient list after sort the list
     }
 
 //This method is responsible for searching for a name in the patients list.
@@ -534,6 +572,22 @@ assigning them positions, departments, hours worked and total amount received.
         System.out.print("Enter the Patient Full Name to be searched: ");
         String patientName = myKb.nextLine();//input entered by the user 
         searcher.searchByName(patients, patientName);
+    }
+    
+//    This method is responsible to print the list of patients, it will be used in other methods like sortPatients and in the menu for patients.
+//    This method use a conditional if-else and a for-each loop
+//The if condition is used to check if the list of patients is empty, if this condition is true, a message will be displayed to the user
+//the else condition is used, in case the list is filled, and the for-each loop will run, and check all the patients in the list and print it at the end
+    private static void displayPatientList(){
+        if(patients.isEmpty()){
+            System.out.println("No patients avaiable to display!");
+        }else{
+            for(Patient patient : patients){
+                System.out.println("==========================================");
+                System.out.println(patient);
+                System.out.println("==========================================");
+            }
+        }
     }
 
 //This method is responsible for calculating and displaying the total value of expenses for patient treatment.   

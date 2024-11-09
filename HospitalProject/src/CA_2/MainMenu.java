@@ -23,6 +23,7 @@ public enum MainMenu {
 }
 
 enum EmployeeMenu{
+    DISPLAY_EMPLOYEE_LIST,
     SORTING_EMPLOYEE_LIST,
     SEARCHING_EMPLOYEE,
     ADDING_NEW_EMPLOYEE,
@@ -34,6 +35,7 @@ enum EmployeeMenu{
 
 enum PatientMenu{
     ADD_NEW_PATIENT,
+    DISPLAY_PATIENT_LIST,
     SORT_PATIENT_LIST,
     SEARCH_PATIENT,
     VIEW_TREATMENT_INCOME,
